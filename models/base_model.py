@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#/usr/bin/python3
 """ parent class for airbnb """
 import uuid
 from datetime import datetime
@@ -32,5 +32,4 @@ class BaseModel:
 
     def __str__(self):
         """Return string representation of the instance."""
-        return "[{}] ({}) {}".format(self.__class__.__name__, \
-                                     self.id, self.__dict__)
+        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
