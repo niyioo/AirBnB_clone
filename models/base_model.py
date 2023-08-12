@@ -1,10 +1,11 @@
 #/usr/bin/python3
-""" Base model that defines the attributes for airbnb """
+""" parent class for airbnb """
 import uuid
 from datetime import datetime
 
 
 class BaseModel:
+    """ describes attributed """
     def __init__(self, *args, **kwargs):
         """Initialize BaseModel instance."""
         self.id = str(uuid.uuid4())
