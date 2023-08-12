@@ -11,7 +11,7 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
 
     def do_create(self, arg):
-    """Create a new instance of BaseModel and save it to JSON file."""
+        """ Create a new instance of BaseModel and save it to JSON file """
     args = shlex.split(arg)
     if not args:
         print("** class name missing **")
