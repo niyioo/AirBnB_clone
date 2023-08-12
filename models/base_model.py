@@ -1,4 +1,4 @@
-#/usr/bin/python3
+#!/usr/bin/python3
 """ parent class for airbnb """
 import uuid
 from datetime import datetime
