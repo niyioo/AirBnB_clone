@@ -32,7 +32,26 @@ class HBNBCommand(cmd.Cmd):
 
     def do_help(self, arg):
         """Display help information for commands."""
-        cmd.Cmd.do_help(self, arg)
+        if arg:
+            cmd.Cmd.do_help(self, arg)
+        else:
+            topics = ", ".join(self.get_names())
+            print("Documented commands (type help <topic>):")
+            print("=" * 40)
+            print(topics)
+            print()
+
+    def help_quit(self):
+        print("Quit command to exit the program")
+
+    def help_EOF(self):
+        print("EOF command to exit the program (Ctrl+D)")
+
+    def help_create(self):
+        print("Create a new instance of BaseModel and save it to JSON file.")
+
+    def help_show(self):
+        print("Show the string representation of an instance.")
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
