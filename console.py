@@ -53,5 +53,6 @@ class HBNBCommand(cmd.Cmd):
     def help_show(self):
         print("Show the string representation of an instance.")
 
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
