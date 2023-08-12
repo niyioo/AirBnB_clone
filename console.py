@@ -3,11 +3,113 @@
 import cmd
 import shlex
 from models import storage
+from models.base_model import BaseModel
 
 
 class HBNBCommand(cmd.Cmd):
     """ Class attributes """
     prompt = "(hbnb) "
+
+    def do_create(self, arg):
+        """Create a new instance of BaseModel and save it to JSON file."""
+        args = shlex.split(arg)
+        if not args:
+            print("** class name missing **")
+            return
+        class_name = args[0]
+        if class_name not in globals():
+            print("** class doesn't exist **")
+            return
+        new_instance = globals()[class_name]()
+        new_instance.save()
+        print(new_instance.id)
+
+    def do_show(self, arg):
+        """Show the string representation of an instance."""
+        args = shlex.split(arg)
+        if not args:
+            print("** class name missing **")
+            return
+        class_name = args[0]
+        if class_name not in globals():
+            print("** class doesn't exist **")
+            return
+        if len(args) < 2:
+            print("** instance id missing **")
+            return
+        instances = storage.all()  # Replace with your actual storage
+        instance_id = args[1]
+        key = class_name + "." + instance_id
+        if key in instances:
+            print(instances[key])
+        else:
+            print("** no instance found **")
+
+    def do_destroy(self, arg):
+        """Delete an instance based on the class name and id."""
+        args = shlex.split(arg)
+        if not args:
+            print("** class name missing **")
+            return
+        class_name = args[0]
+        if class_name not in globals():
+            print("** class doesn't exist **")
+            return
+        if len(args) < 2:
+            print("** instance id missing **")
+            return
+        instances = storage.all()  # Replace with your actual storage
+        instance_id = args[1]
+        key = class_name + "." + instance_id
+        if key in instances:
+            instances.pop(key)
+            storage.save()
+        else:
+            print("** no instance found **")
+
+    def do_all(self, arg):
+        """Print string representation of all instances."""
+        args = shlex.split(arg)
+        instances = storage.all()  # Replace with your actual storage
+        if not args:
+            print([str(instance) for instance in instances.values()])
+            return
+        class_name = args[0]
+        if class_name not in globals():
+            print("** class doesn't exist **")
+            return
+        print([str(instance) for key, instance in instances.items() if class_name in key])
+
+    def do_update(self, arg):
+        """Update an instance based on class name and id."""
+        args = shlex.split(arg)
+        if not args:
+            print("** class name missing **")
+            return
+        class_name = args[0]
+        if class_name not in globals():
+            print("** class doesn't exist **")
+            return
+        if len(args) < 2:
+            print("** instance id missing **")
+            return
+        instances = storage.all()  # Replace with your actual storage
+        instance_id = args[1]
+        key = class_name + "." + instance_id
+        if key not in instances:
+            print("** no instance found **")
+            return
+        if len(args) < 3:
+            print("** attribute name missing **")
+            return
+        if len(args) < 4:
+            print("** value missing **")
+            return
+        attr_name = args[2]
+        attr_value = args[3]
+        instance = instances[key]
+        setattr(instance, attr_name, attr_value)
+        instance.save()
 
     def do_quit(self, arg):
         """Exit the command interpreter."""
@@ -21,14 +123,6 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """Do nothing on empty input."""
         pass
-
-    def do_create(self, arg):
-        """Create a new instance of BaseModel and save it to JSON file."""
-        # Implementation for creating instances goes here
-
-    def do_show(self, arg):
-        """Show the string representation of an instance."""
-        # Implementation for showing instances goes here
 
     def do_help(self, arg):
         """Display help information for commands."""
