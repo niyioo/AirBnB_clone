@@ -11,18 +11,19 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
 
     def do_create(self, arg):
-        """Create a new instance of BaseModel and save it to JSON file."""
-        args = shlex.split(arg)
-        if not args:
-            print("** class name missing **")
-            return
-        class_name = args[0]
-        if class_name not in globals():
-            print("** class doesn't exist **")
-            return
-        new_instance = globals()[class_name]()
-        new_instance.save()
-        print(new_instance.id)
+    """Create a new instance of BaseModel and save it to JSON file."""
+    args = shlex.split(arg)
+    if not args:
+        print("** class name missing **")
+        return
+    class_name = args[0]
+    if class_name not in globals():
+        print("** class doesn't exist **")
+        return
+    new_instance = globals()[class_name]()
+    storage.new(new_instance)  # Use the storage.new() method
+    storage.save()  # Save the instance to JSON file
+    print(new_instance.id)
 
     def do_show(self, arg):
         """Show the string representation of an instance."""
