@@ -1,103 +1,106 @@
 #!/usr/bin/python3
-""" Command line interpreter for the program """
+"""Console module"""
+
 import cmd
-import shlex
 from models import storage
 from models.base_model import BaseModel
+import sys
 
 
 class HBNBCommand(cmd.Cmd):
-    """ Class attributes """
+    """Command interpreter class"""
     prompt = "(hbnb) "
 
+    def do_quit(self, arg):
+        """Quit command to exit the program"""
+        return True
+
+    def do_EOF(self, arg):
+        """Exit the console using Ctrl+D"""
+        return True
+
+    def emptyline(self):
+        """Do nothing when an empty line is entered"""
+        pass
+
     def do_create(self, arg):
-        """ Create a new instance of BaseModel and save it to JSON file """
-    args = shlex.split(arg)
-    if not args:
-        print("** class name missing **")
-        return
-    class_name = args[0]
-    if class_name not in globals():
-        print("** class doesn't exist **")
-        return
-    new_instance = globals()[class_name]()
-    storage.new(new_instance)  # Use the storage.new() method
-    storage.save()  # Save the instance to JSON file
-    print(new_instance.id)
+        """Create a new instance of BaseModel"""
+        if not arg:
+            print("** class name missing **")
+            return
+        try:
+            new_instance = eval(arg)()
+            new_instance.save()
+            print(new_instance.id)
+        except:
+            print("** class doesn't exist **")
 
     def do_show(self, arg):
-        """Show the string representation of an instance."""
-        args = shlex.split(arg)
+        """Print the string representation of an instance"""
+        args = arg.split()
         if not args:
             print("** class name missing **")
             return
-        class_name = args[0]
-        if class_name not in globals():
+        if args[0] not in ["BaseModel"]:
             print("** class doesn't exist **")
             return
         if len(args) < 2:
             print("** instance id missing **")
             return
-        instances = storage.all()  # Replace with your actual storage
-        instance_id = args[1]
-        key = class_name + "." + instance_id
-        if key in instances:
-            print(instances[key])
+        objs = storage.all()
+        key = args[0] + "." + args[1]
+        if key in objs:
+            print(objs[key])
         else:
             print("** no instance found **")
 
     def do_destroy(self, arg):
-        """Delete an instance based on the class name and id."""
-        args = shlex.split(arg)
+        """Delete an instance"""
+        args = arg.split()
         if not args:
             print("** class name missing **")
             return
-        class_name = args[0]
-        if class_name not in globals():
+        if args[0] not in ["BaseModel"]:
             print("** class doesn't exist **")
             return
         if len(args) < 2:
             print("** instance id missing **")
             return
-        instances = storage.all()  # Replace with your actual storage
-        instance_id = args[1]
-        key = class_name + "." + instance_id
-        if key in instances:
-            instances.pop(key)
+        objs = storage.all()
+        key = args[0] + "." + args[1]
+        if key in objs:
+            del objs[key]
             storage.save()
         else:
             print("** no instance found **")
 
     def do_all(self, arg):
-        """Print string representation of all instances."""
-        args = shlex.split(arg)
-        instances = storage.all()  # Replace with your actual storage
+        """Print all instances"""
+        args = arg.split()
+        objs = storage.all()
         if not args:
-            print([str(instance) for instance in instances.values()])
+            print([str(objs[key]) for key in objs])
             return
-        class_name = args[0]
-        if class_name not in globals():
+        if args[0] not in ["BaseModel"]:
             print("** class doesn't exist **")
             return
-        print([str(instance) for key, instance in instances.items() if class_name in key])
+        print([str(objs[key]) for key in objs if key.startswith(args[0])])
 
     def do_update(self, arg):
-        """Update an instance based on class name and id."""
-        args = shlex.split(arg)
+        """Update an instance attribute"""
+        args = arg.split()
+        objs = storage.all()
         if not args:
             print("** class name missing **")
             return
-        class_name = args[0]
-        if class_name not in globals():
+        if args[0] not in ["BaseModel"]:
             print("** class doesn't exist **")
             return
         if len(args) < 2:
             print("** instance id missing **")
             return
-        instances = storage.all()  # Replace with your actual storage
-        instance_id = args[1]
-        key = class_name + "." + instance_id
-        if key not in instances:
+        key = args[0] + "." + args[1]
+        if key not in objs:
             print("** no instance found **")
             return
         if len(args) < 3:
@@ -106,24 +109,16 @@ class HBNBCommand(cmd.Cmd):
         if len(args) < 4:
             print("** value missing **")
             return
+        obj = objs[key]
         attr_name = args[2]
-        attr_value = args[3]
-        instance = instances[key]
-        setattr(instance, attr_name, attr_value)
-        instance.save()
-
-    def do_quit(self, arg):
-        """Exit the command interpreter."""
-        return True
-
-    def do_EOF(self, arg):
-        """Exit the command interpreter at end-of-file (Ctrl+D)."""
-        print("")  # Print a newline
-        return True
-
-    def emptyline(self):
-        """Do nothing on empty input."""
-        pass
+        if hasattr(obj, attr_name):
+            attr_value = args[3]
+            try:
+                attr_value = eval(attr_value)
+            except:
+                pass
+            setattr(obj, attr_name, attr_value)
+            obj.save()
 
     def do_help(self, arg):
         """Display help information for commands."""
