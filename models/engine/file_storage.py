@@ -50,10 +50,10 @@ class FileStorage:
 
     def save(self):
         """Serialize __objects to the JSON file (path: __file_path)."""
-        data = {}
-
-        for key, obj in FileStorage.__objects.items():
-            data[key] = obj.to_dict()
+        data = {
+            key: obj.to_dict()
+            for key, obj in FileStorage.__objects.items()
+        }
 
         with open(FileStorage.__file_path, "w") as file:
             json.dump(data, file)
