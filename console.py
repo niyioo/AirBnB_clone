@@ -123,7 +123,7 @@ class HBNBCommand(cmd.Cmd):
                     ]
                 )
             print(instances_list)
-        else:   
+        else:
             class_name = args[0]
             instances_list = [
                 str(instance)
