@@ -35,7 +35,10 @@ class FileStorage:
                 for key, value in data.items():
                     class_name = value["__class__"]
                     del value["__class__"]
-                    obj = globals()[class_name](**value)
+                    if class_name == "User":
+                        obj = User(**value)
+                    else:
+                        obj = globals()[class_name](**value)
                     self.new(obj)
         except FileNotFoundError:
             pass
