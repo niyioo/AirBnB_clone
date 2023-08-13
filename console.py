@@ -17,7 +17,9 @@ class HBNBCommand(cmd.Cmd):
     """Command processor"""
 
     prompt = "(hbnb) "
-    classes = ['BaseModel', 'User', 'Amenity', 'Place', 'City', 'State', 'Review']
+    classes = [
+        'BaseModel', 'User', 'Amenity', 'Place', 'City', 'State', 'Review'
+        ]
     cmds = ['create', 'show', 'update', 'all', 'destroy', 'count']
 
     def do_quit(self, arg):
@@ -35,13 +37,13 @@ class HBNBCommand(cmd.Cmd):
     def precmd(self, arg):
         """parses command input"""
         if '.' in arg and '(' in arg and ')' in arg:
-            class_name = arg.split('.')
-            command_name = class_name[1].split('(')
-            arguments = command_name[1].split(')')
-            if class_name[0] in HBNBCommand.classes and command_name[0] in HBNBCommand.cmds:
-                arg = command_name[0] + ' ' + class_name[0] + ' ' + arguments[0]
+            clsn = arg.split('.')
+            cmdn = clsn[1].split('(')
+            arguments = cmdn[1].split(')')
+            if clsn[0] in HBNBCommand.classes and cmdn[0] in HBNBCommand.cmds:
+                arg = cmdn[0] + ' ' + clsn[0] + ' ' + arguments[0]
         return arg
-    
+
     def do_create(self, model_type):
         """ Creates an instance according to a given class """
 
@@ -50,9 +52,11 @@ class HBNBCommand(cmd.Cmd):
         elif model_type not in HBNBCommand.classes:
             print("** class doesn't exist **")
         else:
-            class_dict = {'BaseModel': BM, 'User': U, 'Place': P,
-                          'City': C, 'Amenity': A, 'State': S,
-                          'Review': R}
+            class_dict = {
+                'BaseModel': BaseModel, 'User': User, 'Place': Place,
+                          'City': City, 'Amenity': Amenity, 'State': State,
+                          'Review': Review
+                          }
             my_model = class_dict[model_type]()
             print(my_model.id)
             my_model.save()
@@ -145,9 +149,9 @@ class HBNBCommand(cmd.Cmd):
         else:
             all_objs = storage.all()
             for key, objc in all_objs.items():
-                obj_name = objc.__class__.__name__
+                obj_n = objc.__class__.__name__
                 obj_id = objc.id
-                if obj_name == arg_list[0] and obj_id == arg_list[1].strip('"'):
+                if obj_n == arg_list[0] and obj_id == arg_list[1].strip('"'):
                     if len(arg_list) == 2:
                         print("** attribute name missing **")
                     elif len(arg_list) == 3:
