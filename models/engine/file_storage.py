@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ File storage for the airbnb """
 import json
-import os
 
 
 class FileStorage:
@@ -41,7 +40,14 @@ class FileStorage:
                'City': City, 'Amenity': Amenity, 'State': State,
                'Review': Review}
 
-        if os.path.exists(FileStorage.__file_path) is True:
-            with open(FileStorage.__file_path, 'r') as f:
-                for key, value in json.load(f).items():
-                    self.new(cls[value['__class__']](**value))
+        try:
+            with open(FileStorage.__file_path, "r") as file:
+                data = json.load(file)
+                for key, value in data.items():
+                    class_name = value["__class__"]
+                    del value["__class__"]
+                    if class_name in cls:
+                        obj = cls[class_name](**value)
+                        self.new(obj)
+        except FileNotFoundError:
+            pass
