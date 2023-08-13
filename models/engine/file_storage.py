@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ File storage for the airbnb """
 import json
+import os
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
@@ -59,16 +60,14 @@ class FileStorage:
 
     def reload(self):
         """Deserialize the JSON file to __objects."""
-        try:
-            with open(FileStorage.__file_path, "r") as file:
-                data = json.load(file)
+        if os.path.exists(FileStorage.__file_path):
+            with open(FileStorage.__file_path, 'r') as f:
+                data = json.load(f)
                 for key, value in data.items():
-                    class_name = value["__class__"]
-                    if class_name in self.classes:
-                        obj = self.classes[class_name](**value)
-                        self.new(obj)
-        except FileNotFoundError:
-            pass
+                    class_name = value['__class__']
+                    obj_class = self.classes[class_name]
+                    obj = obj_class(**value)
+                    self.new(obj)
 
     def count(self, cls=None):
         """Count the number of instances of a class."""
