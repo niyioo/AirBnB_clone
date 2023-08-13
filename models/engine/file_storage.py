@@ -70,3 +70,11 @@ class FileStorage:
         if cls:
             return len(self.all(cls))
         return len(self.all())
+
+    def delete(self, obj=None):
+        """Delete obj from __objects if it exists."""
+        if obj:
+            key = "{}.{}".format(obj.__class__.__name__, obj.id)
+            if key in FileStorage.__objects:
+                del FileStorage.__objects[key]
+                self.save()
