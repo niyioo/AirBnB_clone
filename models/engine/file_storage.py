@@ -15,6 +15,16 @@ class FileStorage:
     __file_path = "file.json"
     __objects = {}
 
+    classes = {
+        "BaseModel": BaseModel,
+        "User": User,
+        "State": State,
+        "City": City,
+        "Amenity": Amenity,
+        "Place": Place,
+        "Review": Review
+    }
+
     def all(self, cls=None):
         """
         Returns a dictionary of all objects or objects of a specific class.
@@ -49,23 +59,14 @@ class FileStorage:
 
     def reload(self):
         """Deserialize the JSON file to __objects."""
-        classes = {
-        "BaseModel": BaseModel,
-        "User": User,
-        "State": State,
-        "City": City,
-        "Amenity": Amenity,
-        "Place": Place,
-        "Review": Review
-    }
         try:
             with open(FileStorage.__file_path, "r") as file:
                 data = json.load(file)
                 for key, value in data.items():
                     class_name = value["__class__"]
                     del value["__class__"]
-                    if class_name in classes:
-                        obj = classes[class_name](**value)
+                    if class_name in self.classes:
+                        obj = self.classes[class_name](**value)
                         self.new(obj)
         except FileNotFoundError:
             pass
