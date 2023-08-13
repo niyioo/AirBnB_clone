@@ -54,8 +54,8 @@ class HBNBCommand(cmd.Cmd):
         else:
             class_dict = {
                 'BaseModel': BaseModel, 'User': User, 'Place': Place,
-                          'City': City, 'Amenity': Amenity, 'State': State,
-                          'Review': Review
+                'City': City, 'Amenity': Amenity, 'State': State,
+                'Review': Review
                           }
             my_model = class_dict[model_type]()
             print(my_model.id)
