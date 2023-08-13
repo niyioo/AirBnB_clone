@@ -3,8 +3,8 @@
 
 import cmd
 import shlex
-from models import storage
 from models.base_model import BaseModel
+from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
