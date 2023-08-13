@@ -35,7 +35,9 @@ class FileStorage:
                 for key, value in data.items():
                     class_name = value["__class__"]
                     del value["__class__"]
-                    obj = globals()[class_name](**value)
+                    module = __import__("models." + class_name, fromlist=[class_name])
+                    cls = getattr(module, class_name)
+                    obj = cls(**value)
                     self.new(obj)
         except FileNotFoundError:
             pass
