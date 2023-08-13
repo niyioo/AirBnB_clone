@@ -7,6 +7,7 @@ import unittest
 from models.state import State
 from models import storage
 
+
 class TestState(unittest.TestCase):
     """
     Test suite for State class

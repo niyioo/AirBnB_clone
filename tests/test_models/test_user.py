@@ -8,6 +8,7 @@ import datetime
 from models.user import User
 from models import storage
 
+
 class TestUser(unittest.TestCase):
     """
     Test suite for User class

@@ -7,6 +7,7 @@ import unittest
 from models.city import City
 from models import storage
 
+
 class TestCity(unittest.TestCase):
     """
     Test suite for City class

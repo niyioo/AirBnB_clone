@@ -10,6 +10,7 @@ import os
 current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(current_dir))
 
+
 class TestAmenity(unittest.TestCase):
     """Test suite for Amenity class"""
 
@@ -48,6 +49,7 @@ class TestAmenity(unittest.TestCase):
         self.assertEqual(new_amenity.name, self.amenity.name)
         self.assertEqual(new_amenity.created_at, self.amenity.created_at)
         self.assertEqual(new_amenity.updated_at, self.amenity.updated_at)
+
 
 if __name__ == "__main__":
     unittest.main()

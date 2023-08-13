@@ -103,5 +103,6 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(self.base_model.id, new_instance.id)
         self.assertEqual(self.base_model.created_at, new_instance.created_at)
 
+
 if __name__ == "__main__":
     unittest.main()

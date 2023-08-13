@@ -7,6 +7,7 @@ import unittest
 from models.place import Place
 from models import storage
 
+
 class TestPlace(unittest.TestCase):
     """
     Test suite for Place class
