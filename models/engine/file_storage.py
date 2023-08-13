@@ -26,15 +26,15 @@ class FileStorage:
     }
 
     def all(self, cls=None):
-        """Return the dictionary __objects."""
+        """Return a list of string representations of objects."""
         if cls is None:
-            return self.__objects
+            objs = self.__objects.values()
         else:
-            filtered_objs = {
-                key: obj for key, obj in self.__objects.items()
+            objs = [
+                obj for key, obj in self.__objects.items()
                 if cls == key.split('.')[0]
-            }
-            return filtered_objs
+            ]
+        return [str(obj) for obj in objs]
 
     def new(self, obj):
         """Set in __objects the obj with key <obj class name>.id."""
