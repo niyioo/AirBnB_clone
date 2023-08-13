@@ -112,16 +112,17 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
 
-        instances = storage.all()
         if not args:
-            instances_list = [
-                str(instance) for instance in instances.values()
-            ]
+            instances_list = []
+            for class_name in self.valid_classes:
+                instances_list.extend(
+                    str(instance) for instance in storage.all(class_name).values()
+                )
             print(instances_list)
         else:
             class_name = args[0]
             instances_list = [
-                str(instance) for key, instance in instances.items()
+                str(instance) for key, instance in storage.all(class_name).items()
                 if class_name in key
             ]
             print(instances_list)
