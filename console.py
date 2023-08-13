@@ -88,7 +88,7 @@ class HBNBCommand(cmd.Cmd):
             instances_list = [
                 str(instance) for key, instance in instances.items()
                 if class_name in key
-            ]   
+            ]
             print(instances_list)
             return
         class_name = args[0]
