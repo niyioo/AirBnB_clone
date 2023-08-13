@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ File storage for the airbnb """
 import json
+from models.base_model import BaseModel
 
 
 class FileStorage:
