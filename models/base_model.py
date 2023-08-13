@@ -12,7 +12,6 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = self.created_at
-            storage.new(self)
         else:
             date_format = "%Y-%m-%dT%H:%M:%S.%f"
             for key, value in kwargs.items():
