@@ -29,6 +29,10 @@ class HBNBCommand(cmd.Cmd):
         "Review": Review
     }
 
+    def __init__(self):
+        super().__init__()
+        storage.reload()
+        
     def do_quit(self, arg):
         """
         Quit command to exit the program
