@@ -37,11 +37,19 @@ class FileStorage:
         from models.amenity import Amenity
         from models.place import Place
         from models.review import Review
-        cls = {'BaseModel': BaseModel, 'User': User, 'Place': Place,
-               'City': City, 'Amenity': Amenity, 'State': State,
-               'Review': Review}
+        cls = {
+            'BaseModel': BaseModel, 'User': User, 'Place': Place,
+            'City': City, 'Amenity': Amenity, 'State': State,
+            'Review': Review
+        }
 
-        if os.path.exists(FileStorage.__file_path) is True:
-            with open(FileStorage.__file_path, 'r') as file:
-                for key, value in json.load(file).items():
-                    self.new(cls[value['__class__']](**value))
+        if os.path.exists(FileStorage.__file_path):
+            try:
+                with open(FileStorage.__file_path, 'r') as file:
+                    data = json.load(file)
+                    for key, value in data.items():
+                        obj_class = value.get('__class__')
+                        if obj_class in cls:
+                            self.new(cls[obj_class](**value))
+            except Exception as e:
+                print(f"Error loading JSON file: {e}")
