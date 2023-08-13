@@ -29,7 +29,7 @@ class HBNBCommand(cmd.Cmd):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.storage = storage.FileStorage()
+        self.storage = storage
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
