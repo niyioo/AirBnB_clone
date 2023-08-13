@@ -60,7 +60,8 @@ class HBNBCommand(cmd.Cmd):
             }
             my_model = class_dict[model_type]()
             print(my_model.id)
-            my_model.save()
+            storage.new(my_model)
+            storage.save()
 
     def do_show(self, arg):
         """ Shows string representation of an instance passed """
