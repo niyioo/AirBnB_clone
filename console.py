@@ -129,9 +129,11 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
     def do_all(self, arg):
-        """Print string representation of all instances or of a specific class."""
+        """
+        Print string representation of all instances of a class.
+        """
         args = shlex.split(arg)
-        if not args:
+        if not args or args[0] not in self.valid_classes:
             instances_list = []
             for class_name in self.valid_classes:
                 instances_list.extend(
@@ -143,12 +145,10 @@ class HBNBCommand(cmd.Cmd):
             print(instances_list)
         else:
             class_name = args[0]
-            if class_name not in self.valid_classes:
-                print("** class doesn't exist **")
-                return
             instances_list = [
                 str(instance)
                 for key, instance in storage.all(class_name).items()
+                if class_name in key
             ]
             print(instances_list)
 
