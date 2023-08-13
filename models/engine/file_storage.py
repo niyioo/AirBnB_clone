@@ -26,22 +26,9 @@ class FileStorage:
         "Review": Review
     }
 
-    def all(self, cls=None):
-        """
-        Returns a dictionary of all objects or objects of a specific class.
-        Args:
-            cls (str): Class name to filter objects (optional).
-        Returns:
-            dict: Dictionary of objects.
-        """
-        if cls:
-            objects_dict = {
-                key: obj for key, obj in FileStorage.__objects.items()
-                if key.startswith(cls + ".")
-            }
-        else:
-            objects_dict = FileStorage.__objects
-        return objects_dict
+    def all(self):
+        """ Returns the dictionary __objects """
+        return FileStorage.__objects
 
     def new(self, obj):
         """Set in __objects the obj with key <obj class name>.id."""

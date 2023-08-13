@@ -32,7 +32,7 @@ class HBNBCommand(cmd.Cmd):
     def __init__(self):
         super().__init__()
         storage.reload()
-        
+
     def do_quit(self, arg):
         """
         Quit command to exit the program
@@ -125,23 +125,19 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
     def do_all(self, arg):
-        """Print string representation of all instances."""
-        args = shlex.split(arg)
-        if args and args[0] not in self.valid_classes:
-            print("** class doesn't exist **")
+        """ Prints string representation of all instances of a given class """
+        if not arg:
+            print("** class name missing **")
             return
 
-        if not args:
-            instances_list = []
-            for class_name in self.valid_classes:
-                instances = storage.all(class_name).values()
-                instances_list.extend([str(instance) for instance in instances])
-            print(instances_list)
+        args = arg.split(' ')
+
+        if args[0] not in self.valid_classes:
+            print("** class doesn't exist **")
         else:
-            class_name = args[0]
-            instances = storage.all(class_name).values()
-            instances_list = [str(instance) for instance in instances]
-            print(instances_list)
+            all_objs = storage.all(args[0])
+            list_instances = [str(value) for value in all_objs.values()]
+            print(list_instances)
 
     def do_update(self, arg):
         """
