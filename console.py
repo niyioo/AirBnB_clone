@@ -39,6 +39,20 @@ class HBNBCommand(cmd.Cmd):
         """Do nothing when an empty line is entered"""
         pass
 
+    def precmd(self, line):
+        """
+        Preprocess the command before execution
+        """
+        parts = line.split('.')
+        if len(parts) == 2:
+            class_name = parts[0]
+            method_name = parts[1]
+            if class_name in self.valid_classes and method_name == "all()":
+                return f"all {class_name}"
+            elif class_name in self.valid_classes and method_name == "count()":
+                return f"count {class_name}"
+        return line
+    
     def do_create(self, arg):
         """Create a new instance of a class and save it to JSON file."""
         args = shlex.split(arg)
