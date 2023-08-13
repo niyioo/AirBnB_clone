@@ -26,22 +26,9 @@ class FileStorage:
         "Review": Review
     }
 
-    def all(self, cls=None):
-        """
-        Returns a dictionary of all objects or objects of a specific class.
-        Args:
-            cls (str): Class name to filter objects (optional).
-        Returns:
-            dict: Dictionary of objects.
-        """
-        if cls:
-            objects_dict = {
-                key: obj for key, obj in FileStorage.__objects.items()
-                if key.startswith(cls + ".")
-            }
-        else:
-            objects_dict = FileStorage.__objects
-        return objects_dict
+    def all(self):
+        """ Returns the dictionary __objects """
+        return FileStorage.__objects
 
     def new(self, obj):
         """Set in __objects the obj with key <obj class name>.id."""
@@ -68,17 +55,3 @@ class FileStorage:
                     obj_class = self.classes[class_name]
                     obj = obj_class(**value)
                     self.new(obj)
-
-    def count(self, cls=None):
-        """Count the number of instances of a class."""
-        if cls:
-            return len(self.all(cls))
-        return len(self.all())
-
-    def delete(self, obj=None):
-        """Delete obj from __objects if it exists."""
-        if obj:
-            key = "{}.{}".format(obj.__class__.__name__, obj.id)
-            if key in FileStorage.__objects:
-                del FileStorage.__objects[key]
-                self.save()
