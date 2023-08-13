@@ -2,7 +2,6 @@
 """ Parent class for Airbnb """
 import uuid
 from datetime import datetime
-from models import storage
 
 
 class BaseModel:
@@ -31,6 +30,7 @@ class BaseModel:
     def save(self):
         """ Updates updated_at with current datetime and saves to storage """
         self.updated_at = datetime.now()
+        from models import storage
         storage.save()
 
     def to_dict(self):
