@@ -64,7 +64,6 @@ class FileStorage:
                 data = json.load(file)
                 for key, value in data.items():
                     class_name = value["__class__"]
-                    del value["__class__"]
                     if class_name in self.classes:
                         obj = self.classes[class_name](**value)
                         self.new(obj)
