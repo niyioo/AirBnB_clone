@@ -126,18 +126,13 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """ Prints string representation of all instances of a given class """
-        if not arg:
+        if arg:
             print("** class name missing **")
             return
 
-        args = arg.split(' ')
-
-        if args[0] not in self.valid_classes:
-            print("** class doesn't exist **")
-        else:
-            all_objs = storage.all(args[0])
-            list_instances = [str(value) for value in all_objs.values()]
-            print(list_instances)
+        all_objs = storage.all()
+        list_instances = [str(value) for value in all_objs.values()]
+        print(list_instances)
 
     def do_update(self, arg):
         """
