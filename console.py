@@ -133,7 +133,7 @@ class HBNBCommand(cmd.Cmd):
                 instances_list.extend(
                     [
                         str(instance)
-                        for instance in storage.all(class_name)
+                        for instance in storage.all(class_name).values()
                     ]
                 )
             print(instances_list)
@@ -141,7 +141,7 @@ class HBNBCommand(cmd.Cmd):
             class_name = args[0]
             instances_list = [
                 str(instance)
-                for instance in storage.all(class_name)
+                for instance in storage.all(class_name).values()
             ]
             print(instances_list)
 
