@@ -124,20 +124,28 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** no instance found **")
 
+    def precmd(self, line):
+        """Preprocess the command line before executing a command."""
+        if line.startswith("all "):
+            cls_name = line.split()[1]
+            if cls_name not in self.valid_classes:
+                print("** class doesn't exist **")
+                return ""
+            return f"all {cls_name}"
+        return line
+
     def do_all(self, arg):
-        """ Prints string representation of all instances of a given class """
+        """Print string representation of all instances."""
         if not arg:
-            print("** class name missing **")
-            return
-
-        args = arg.split(' ')
-
-        if args[0] not in self.valid_classes:
-            print("** class doesn't exist **")
+            all_objs = storage.all()
+            list_instances = [str(value) for value in all_objs.values()]
+            print(list_instances)
         else:
-            all_objs = storage.all(args[0])
-        list_instances = [str(value) for value in all_objs.values()]
-        print(list_instances)
+            args = arg.split(' ')
+            class_name = args[0]
+            all_objs = storage.all(class_name)
+            list_instances = [str(value) for value in all_objs.values()]
+            print(list_instances)
 
     def do_update(self, arg):
         """
