@@ -25,16 +25,9 @@ class FileStorage:
         "Review": Review
     }
 
-    def all(self, cls=None):
-        """Return a list of string representations of objects."""
-        if cls is None:
-            objs = self.__objects.values()
-        else:
-            objs = [
-                obj for key, obj in self.__objects.items()
-                if cls == key.split('.')[0]
-            ]
-        return [str(obj) for obj in objs]
+    def all(self):
+        """ Returns the dictionary __objects """
+        return FileStorage.__objects
 
     def new(self, obj):
         """Set in __objects the obj with key <obj class name>.id."""
