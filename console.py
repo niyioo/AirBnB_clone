@@ -55,6 +55,28 @@ class HBNBCommand(cmd.Cmd):
         new_instance.save()
         print(new_instance.id)
 
+    def __getattr__(self, attr):
+        """
+        Handle dynamic attribute access for class.all() syntax
+        """
+        class_name = attr
+        if class_name in self.valid_classes:
+            return lambda x: self.do_all(f"{class_name}")
+        raise AttributeError
+
+    def default(self, line):
+        """
+        Handle dynamic attribute access for class.all() syntax in default case
+        """
+        args = line.split('.')
+        if len(args) == 2:
+            class_name = args[0]
+            method_name = args[1]
+            if class_name in self.valid_classes and method_name == "all()":
+                self.do_all(f"{class_name}")
+                return
+        cmd.Cmd.default(self, line)
+
     def do_show(self, arg):
         """Show the string representation of an instance."""
         args = shlex.split(arg)
@@ -107,26 +129,28 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
     def do_all(self, arg):
-        """Print string representation of all instances."""
+        """Print string representation of all instances or of a specific class."""
         args = shlex.split(arg)
-    
         if not args:
-            print("** class name missing **")
-            return
-    
-        class_name = args[0]
-        if class_name not in self.valid_classes:
-            print("** class doesn't exist **")
-            return
-
-        instances_list = []
-        if class_name in self.valid_classes:
+            instances_list = []
+            for class_name in self.valid_classes:
+                instances_list.extend(
+                    [
+                        str(instance)
+                        for instance in storage.all(class_name).values()
+                    ]
+                )
+            print(instances_list)
+        else:
+            class_name = args[0]
+            if class_name not in self.valid_classes:
+                print("** class doesn't exist **")
+                return
             instances_list = [
                 str(instance)
-                for instance in self.valid_classes[class_name].all().values()
+                for key, instance in storage.all(class_name).items()
             ]
-    
-        print(instances_list)
+            print(instances_list)
 
     def do_update(self, arg):
         """Update an instance based on class name and id."""
