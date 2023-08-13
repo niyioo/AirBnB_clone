@@ -82,16 +82,24 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """Print string representation of all instances."""
-        args = shlex.split(arg)
-        instances = storage.all()  # Replace with your actual storage
-        if not args:
-            print([str(instance) for instance in instances.values()])
-            return
-        class_name = args[0]
-        if class_name not in globals():
-            print("** class doesn't exist **")
-            return
-        print([str(instance) for key, instance in instances.items() if class_name in key])
+    args = shlex.split(arg)
+    instances = storage.all()
+    if not args:
+        instances_list = [
+            str(instance) for key, instance in instances.items()
+            if class_name in key
+        ]
+        print(instances_list)
+        return
+    class_name = args[0]
+    if class_name not in globals():
+        print("** class doesn't exist **")
+        return
+    instances_list = [
+        str(instance) for key, instance in instances.items()
+        if class_name in key
+    ]
+    print(instances_list)
 
     def do_update(self, arg):
         """Update an instance based on class name and id."""
