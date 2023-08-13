@@ -6,7 +6,7 @@ from models import storage
 
 
 class BaseModel:
-    """Defines all common attributes/methods
+    """Defines the attributes
     """
     def __init__(self, *args, **kwargs):
         """initializes all attributes
@@ -25,21 +25,21 @@ class BaseModel:
                     setattr(self, key, value)
 
     def __str__(self):
-        """returns class name, id and attribute dictionary
+        """the class name, id and attribute dictionary
         """
         class_name = "[" + self.__class__.__name__ + "]"
         dct = {k: v for (k, v) in self.__dict__.items() if (not v) is False}
         return class_name + " (" + self.id + ") " + str(dct)
 
     def save(self):
-        """updates last update time
+        """updates time
         """
         self.updated_at = datetime.now()
         storage.save()
 
     def to_dict(self):
-        """creates a new dictionary, adding a key and returning
-        datemtimes converted to strings
+        """creates a new dictionary and
+        convert to strings
         """
         new_dict = {}
 
