@@ -6,14 +6,12 @@ from models import storage
 
 
 class BaseModel:
-    """ describes attributed """
+    """ describes attributes """
     def __init__(self, *args, **kwargs):
         """Initialize BaseModel instance."""
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
-        storage.new(self)
-        self.storage = kwargs.get('storage', None)
 
         if kwargs:
             for key, value in kwargs.items():
@@ -25,9 +23,7 @@ class BaseModel:
     def save(self):
         """Update updated_at with current datetime."""
         self.updated_at = datetime.now()
-        if self.storage:
-            self.storage.new(self)
-            self.storage.save()
+        storage.save()
 
     def to_dict(self):
         """Return dictionary representation of the instance."""
