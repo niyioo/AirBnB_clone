@@ -130,12 +130,10 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             instances_list = []
             for class_name in self.valid_classes:
-                instances_list.extend(
-                    [
-                        str(instance)
-                        for instance in storage.all(class_name).values()
-                    ]
-                )
+                instances = storage.all(class_name).values()
+                for instance in instances:
+                    print(f"Class: {instance.__class__.__name__}, ID: {instance.id}")
+                    instances_list.append(str(instance))
             print(instances_list)
         else:
             class_name = args[0]
