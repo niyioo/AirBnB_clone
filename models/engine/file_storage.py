@@ -1,6 +1,13 @@
 #!/usr/bin/python3
 """ File storage for the airbnb """
 import json
+from models.base_model import BaseModel
+from models.user import User
+from models.place import Place
+from models.city import City
+from models.amenity import Amenity
+from models.state import State
+from models.review import Review
 
 
 class FileStorage:
@@ -49,3 +56,9 @@ class FileStorage:
                         self.new(obj)
         except FileNotFoundError:
             pass
+    
+    def count(self, cls=None):
+        """Count the number of instances of a class."""
+        if cls:
+            return len(self.all(cls))
+        return len(self.all())

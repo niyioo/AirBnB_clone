@@ -5,6 +5,7 @@ import cmd
 import shlex
 from models.base_model import BaseModel
 from models import storage
+from models.user import User
 from models.state import State
 from models.city import City
 from models.amenity import Amenity
@@ -164,6 +165,21 @@ class HBNBCommand(cmd.Cmd):
         instance = instances[key]
         setattr(instance, attr_name, attr_value)
         instance.save()
+
+    def do_count(self, arg):
+        """Retrieve the number of instances of a class."""
+        args = shlex.split(arg)
+        if not args:
+            print("** class name missing **")
+            return
+
+        class_name = args[0]
+        if class_name not in self.valid_classes:
+            print("** class doesn't exist **")
+            return
+
+        instances_count = storage.count(class_name)
+        print(instances_count)
 
     def do_help(self, arg):
         """Display help information for commands."""
