@@ -2,12 +2,28 @@
 """ File storage for the airbnb """
 import json
 from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
 class FileStorage:
     """ file storage class attributes """
     __file_path = "file.json"
     __objects = {}
+
+    classes = {
+        "BaseModel": BaseModel,
+        "User": User,
+        "State": State,
+        "City": City,
+        "Amenity": Amenity,
+        "Place": Place,
+        "Review": Review
+    }
 
     def all(self, cls=None):
         """Return the dictionary __objects."""
@@ -37,12 +53,6 @@ class FileStorage:
 
     def reload(self):
         """Deserialize the JSON file to __objects."""
-        from models.user import User
-        from models.state import State
-        from models.city import City
-        from models.amenity import Amenity
-        from models.place import Place
-        from models.review import Review
         try:
             with open(FileStorage.__file_path, "r") as file:
                 data = json.load(file)
@@ -54,7 +64,7 @@ class FileStorage:
                         self.new(obj)
         except FileNotFoundError:
             pass
-    
+
     def count(self, cls=None):
         """Count the number of instances of a class."""
         if cls:
