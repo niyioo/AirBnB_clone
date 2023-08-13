@@ -2,13 +2,13 @@
 """ Entry point of the command interpreter """
 import cmd
 from models import storage
-from models.base_model import BaseModel as BM
-from models.user import User as U
-from models.place import Place as P
-from models.city import City as C
-from models.amenity import Amenity as A
-from models.state import State as S
-from models.review import Review as R
+from models.base_model import BaseModel
+from models.user import User
+from models.place import Place
+from models.city import City
+from models.amenity import Amenity
+from models.state import State
+from models.review import Review
 import json
 import shlex
 
