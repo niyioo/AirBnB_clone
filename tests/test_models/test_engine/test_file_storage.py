@@ -50,10 +50,10 @@ class TestFileStorage(unittest.TestCase):
         self.assertIn(self.base_model, all_objs.values())
 
     def test_delete(self):
-    """Test the delete() method of FileStorage"""
-    self.storage.delete(self.base_model)
-    all_objs = self.storage.all()
-    self.assertNotIn(self.base_model, all_objs.values())
+        """Test the delete() method of FileStorage"""
+        self.storage.delete(self.base_model)
+        all_objs = self.storage.all()
+        self.assertNotIn(self.base_model, all_objs.values())
 
     def test_count(self):
         """Test the count() method of FileStorage"""
