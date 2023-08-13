@@ -97,7 +97,7 @@ class HBNBCommand(cmd.Cmd):
             return
         instances_list = [
             str(instance) for key, instance in instances.items()
-        if class_name in key
+            if class_name in key
         ]
         print(instances_list)
 
