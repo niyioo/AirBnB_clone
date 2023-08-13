@@ -117,10 +117,13 @@ class HBNBCommand(cmd.Cmd):
             instances_list = []
             for class_name in self.valid_classes:
                 instances_list.extend(
-                    [str(instance) for instance in storage.all(class_name).values()]
+                    [
+                        str(instance)
+                        for instance in storage.all(class_name).values()
+                    ]
                 )
             print(instances_list)
-        else:
+        else:   
             class_name = args[0]
             instances_list = [
                 str(instance)
@@ -128,7 +131,6 @@ class HBNBCommand(cmd.Cmd):
                 if class_name in key
             ]
             print(instances_list)
-
 
     def do_update(self, arg):
         """Update an instance based on class name and id."""
