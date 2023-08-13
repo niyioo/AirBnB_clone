@@ -2,55 +2,48 @@
 """ Parent class for Airbnb """
 import uuid
 from datetime import datetime
-
+from models.engine.file_storage import storage
 
 class BaseModel:
-    """Defines the attributes
-    """
+    """Defines attributes and methods for the base model."""
     def __init__(self, *args, **kwargs):
-        """initializes all attributes
-        """
+        """Initializes BaseModel instance."""
         if not kwargs:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = self.created_at
-
+            storage.new(self)
         else:
-            f = "%Y-%m-%dT%H:%M:%S.%f"
+            date_format = "%Y-%m-%dT%H:%M:%S.%f"
             for key, value in kwargs.items():
                 if key == 'created_at' or key == 'updated_at':
-                    value = datetime.strptime(kwargs[key], f)
+                    value = datetime.strptime(value, date_format)
                 if key != '__class__':
                     setattr(self, key, value)
 
     def __str__(self):
-        """the class name, id and attribute dictionary
-        """
+        """Returns string representation of the instance."""
         class_name = "[" + self.__class__.__name__ + "]"
-        dct = {k: v for (k, v) in self.__dict__.items() if (not v) is False}
-        return class_name + " (" + self.id + ") " + str(dct)
+        attribute_dict = {
+            k: v for (k, v) in self.__dict__.items() if v is not False
+        }
+        return class_name + " (" + self.id + ") " + str(attribute_dict)
 
     def save(self):
-        """updates time
-        """
+        """Updates updated_at with current datetime and saves to storage."""
         self.updated_at = datetime.now()
-        from models import storage
         storage.save()
 
     def to_dict(self):
-        """creates a new dictionary and
-        convert to strings
-        """
-        new_dict = {}
+        """Returns dictionary representation of the instance."""
+        instance_dict = {}
 
-        for key, values in self.__dict__.items():
+        for key, value in self.__dict__.items():
             if key == "created_at" or key == "updated_at":
-                new_dict[key] = values.strftime("%Y-%m-%dT%H:%M:%S.%f")
+                instance_dict[key] = value.strftime("%Y-%m-%dT%H:%M:%S.%f")
             else:
-                if not values:
-                    pass
-                else:
-                    new_dict[key] = values
-        new_dict['__class__'] = self.__class__.__name__
+                if value is not None:
+                    instance_dict[key] = value
+        instance_dict['__class__'] = self.__class__.__name__
 
-        return new_dict
+        return instance_dict
