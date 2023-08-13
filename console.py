@@ -71,7 +71,7 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
             return
 
-        instances = storage.all()
+        instances = self.storage.all()
         instance_id = args[1]
         key = class_name + "." + instance_id
 
@@ -96,13 +96,13 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
             return
 
-        instances = storage.all()
+        instances = self.storage.all()
         instance_id = args[1]
         key = class_name + "." + instance_id
 
         if key in instances:
             instances.pop(key)
-            storage.save()
+            self.storage.save()
         else:
             print("** no instance found **")
 
@@ -119,7 +119,7 @@ class HBNBCommand(cmd.Cmd):
                 instances_list.extend(
                     [
                         str(instance)
-                        for instance in storage.all(class_name).values()
+                        for instance in self.storage.all(class_name).values()
                     ]
                 )
             print(instances_list)
@@ -127,7 +127,7 @@ class HBNBCommand(cmd.Cmd):
             class_name = args[0]
             instances_list = [
                 str(instance)
-                for key, instance in storage.all(class_name).items()
+                for key, instance in self.storage.all(class_name).items()
                 if class_name in key
             ]
             print(instances_list)
@@ -148,7 +148,7 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
             return
 
-        instances = storage.all()
+        instances = self.storage.all()
         instance_id = args[1]
         key = class_name + "." + instance_id
 
@@ -182,7 +182,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
 
-        instances_count = storage.count(class_name)
+        instances_count = self.storage.count(class_name)
         print(instances_count)
 
     def do_help(self, arg):
