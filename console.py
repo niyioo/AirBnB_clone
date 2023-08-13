@@ -61,7 +61,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
 
-        new_instance = self.valid_classes[class_name](storage=storage)
+        new_instance = self.valid_classes[class_name]()
         new_instance.save()
         print(new_instance.id)
 
