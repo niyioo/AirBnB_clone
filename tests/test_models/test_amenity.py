@@ -1,9 +1,12 @@
 #!/usr/bin/python3
 """Unit tests for Amenity class"""
-
 import unittest
 from models.amenity import Amenity
 from models import storage
+import sys
+
+
+sys.path.append("..")
 
 class TestAmenity(unittest.TestCase):
     """Test suite for Amenity class"""
