@@ -40,7 +40,7 @@ class BaseModel:
             if key == "created_at" or key == "updated_at":
                 instance_dict[key] = value.strftime("%Y-%m-%dT%H:%M:%S.%f")
             else:
-                if not value:
+                if value is not None:
                     pass
                 else:
                     instance_dict[key] = value
