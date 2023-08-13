@@ -2,6 +2,7 @@
 """ parent class for airbnb """
 import uuid
 from datetime import datetime
+from models import storage
 
 
 class BaseModel:
@@ -12,6 +13,7 @@ class BaseModel:
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
         storage.new(self)
+        self.storage = kwargs.get('storage', None)
 
         if kwargs:
             for key, value in kwargs.items():
@@ -23,9 +25,9 @@ class BaseModel:
     def save(self):
         """Update updated_at with current datetime."""
         self.updated_at = datetime.now()
-        from models import storage
-        storage.new(self)
-        storage.save()
+        if self.storage:
+            self.storage.new(self)
+            self.storage.save()
 
     def to_dict(self):
         """Return dictionary representation of the instance."""
