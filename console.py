@@ -125,12 +125,14 @@ class HBNBCommand(cmd.Cmd):
             print(instances_list)
         else:
             class_name = args[0]
-            instances_list = [
-                str(instance)
-                for key, instance in storage.all(class_name).items()
-                if class_name in key
-            ]
-            print(instances_list)
+            if class_name in self.valid_classes:
+                instances_list = [
+                    str(instance)
+                    for instance in self.valid_classes[class_name].all().values()
+                ]
+                print(instances_list)
+            else:
+                print("** class doesn't exist **")
 
     def do_update(self, arg):
         """Update an instance based on class name and id."""
@@ -207,6 +209,9 @@ class HBNBCommand(cmd.Cmd):
 
     def help_show(self):
         print("Show the string representation of an instance.")
+
+    def help_all(self):
+        print("Print string representation of all instances of a class.")
 
 
 if __name__ == '__main__':
