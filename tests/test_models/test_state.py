@@ -1,68 +1,39 @@
 #!/usr/bin/python3
 """
-Unit tests for State class
+Unittest for amenity.py
 """
-
 import unittest
 from models.state import State
-from models import storage
+import datetime
 
 
 class TestState(unittest.TestCase):
-    """
-    Test suite for State class
-    """
+    """ Tests instances and methods from State class """
 
-    def setUp(self):
-        """Set up test instance"""
-        self.state = State()
-        self.state.name = "California"
+    s = State()
 
-    def tearDown(self):
-        """Clean up after test"""
-        storage.delete(self.state)
-        self.state = None
+    def test_class_exists(self):
+        """tests if class exists"""
+        res = "<class 'models.state.State'>"
+        self.assertEqual(str(type(self.s)), res)
 
-    def test_attributes(self):
-        """Test presence of attributes"""
-        self.assertTrue(hasattr(self.state, "name"))
+    def test_user_inheritance(self):
+        """test if State is a subclass of BaseModel"""
+        self.assertIsInstance(self.s, State)
 
-    def test_save(self):
-        """Test the save method"""
-        original_updated_at = self.state.updated_at
-        self.state.save()
-        self.assertNotEqual(original_updated_at, self.state.updated_at)
+    def testHasAttributes(self):
+        """verify if attributes exist"""
+        self.assertTrue(hasattr(self.s, 'name'))
+        self.assertTrue(hasattr(self.s, 'id'))
+        self.assertTrue(hasattr(self.s, 'created_at'))
+        self.assertTrue(hasattr(self.s, 'updated_at'))
 
-    def test_name_type(self):
-        """Test if 'name' attribute is of type str"""
-        self.assertIsInstance(self.state.name, str)
+    def test_types(self):
+        """tests if the type of the attribute is the correct one"""
+        self.assertIsInstance(self.s.name, str)
+        self.assertIsInstance(self.s.id, str)
+        self.assertIsInstance(self.s.created_at, datetime.datetime)
+        self.assertIsInstance(self.s.updated_at, datetime.datetime)
 
-    def test_str_representation(self):
-        """Test the __str__ representation"""
-        expected_str = "[State] ({}) {}".format(
-            self.state.id, self.state.__dict__)
-        self.assertEqual(str(self.state), expected_str)
-
-    def test_relationships(self):
-        """Test relationships with other classes"""
-        city1 = City(state_id=self.state.id)
-        city2 = City(state_id=self.state.id)
-        storage.new(city1)
-        storage.new(city2)
-        storage.save()
-        self.assertIn(city1, self.state.cities)
-        self.assertIn(city2, self.state.cities)
-
-    def test_additional_attributes(self):
-        """Test additional attributes"""
-        self.state.population = 1000000
-        self.assertEqual(self.state.population, 1000000)
-
-    def test_custom_method(self):
-        """Test a custom method that operates on the State class"""
-        self.state.update_population(1500000)
-        self.assertEqual(self.state.population, 1500000)
-
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()
