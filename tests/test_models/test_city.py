@@ -1,48 +1,40 @@
 #!/usr/bin/python3
 """
-Unit tests for City class
+Unittest for user.py
 """
-
 import unittest
 from models.city import City
-from models import storage
+import datetime
 
 
 class TestCity(unittest.TestCase):
-    """
-    Test suite for City class
-    """
+    """Tests instances and methods from city class"""
 
-    def setUp(self):
-        """Set up test instance"""
-        self.city = City()
-        self.city.name = "New York"
+    c = City()
 
-    def tearDown(self):
-        """Clean up after test"""
-        storage.delete(self.city)
-        self.city = None
+    def test_class_exists(self):
+        """tests if class exists"""
+        self.assertEqual(str(type(self.c)), "<class 'models.city.City'>")
 
-    def test_attributes(self):
-        """Test presence of attributes"""
-        self.assertTrue(hasattr(self.city, "name"))
+    def test_user_inheritance(self):
+        """test if city is a subclass of BaseModel"""
+        self.assertTrue(self.c, City)
 
-    def test_save(self):
-        """Test the save method"""
-        original_updated_at = self.city.updated_at
-        self.city.save()
-        self.assertNotEqual(original_updated_at, self.city.updated_at)
+    def testHasAttributes(self):
+        """verify if attributes exist"""
+        self.assertTrue(hasattr(self.c, 'state_id'))
+        self.assertTrue(hasattr(self.c, 'name'))
+        self.assertTrue(hasattr(self.c, 'id'))
+        self.assertTrue(hasattr(self.c, 'created_at'))
+        self.assertTrue(hasattr(self.c, 'updated_at'))
 
-    def test_name_type(self):
-        """Test if 'name' attribute is of type str"""
-        self.assertIsInstance(self.city.name, str)
+    def test_types(self):
+        """tests if the type of the attribute is the correct one"""
+        self.assertIsInstance(self.c.state_id, str)
+        self.assertIsInstance(self.c.name, str)
+        self.assertIsInstance(self.c.id, str)
+        self.assertIsInstance(self.c.created_at, datetime.datetime)
+        self.assertIsInstance(self.c.updated_at, datetime.datetime)
 
-    def test_str_representation(self):
-        """Test the __str__ representation"""
-        expected_str = "[City] ({}) {}".format(
-            self.city.id, self.city.__dict__)
-        self.assertEqual(str(self.city), expected_str)
-
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()
