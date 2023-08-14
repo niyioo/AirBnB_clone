@@ -14,6 +14,7 @@ class TestBaseModel(unittest.TestCase):
     def setUp(self):
         """Set up test instance"""
         self.base_model = BaseModel()
+        self.base_model.name = "Test Model"
         self.storage = FileStorage()
         self.storage.new(self.base_model)
 
