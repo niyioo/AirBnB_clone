@@ -8,7 +8,7 @@ How to Start the Command Interpreter
 
 1. Clone this repository to your local machine:
  
-    git clone https://github.com/niyi/AirBnB_clone.git
+    git clone https://github.com/niyioo/AirBnB_clone.git
 
 2. Navigate to the project directory:
 
