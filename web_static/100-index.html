@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
     <title>AirBnB Clone</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3.0, minimum-scale=0.86">
     <link rel="stylesheet" type="text/css" href="styles/4-common.css">
     <link rel="stylesheet" type="text/css" href="styles/3-header.css">
     <link rel="stylesheet" type="text/css" href="styles/3-footer.css">
     <link rel="stylesheet" type="text/css" href="styles/6-filters.css">
-    <link rel="stylesheet" type="text/css" href="styles/8-places.css">
+    <link rel="stylesheet" type="text/css" href="styles/100-places.css">
     <link rel="icon" type="image/png" href="images/icon.png">
+    <link
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
 </head>
 <body>
     <header>
-        <div class="logo"></div>
     </header>
     <div class="container">
         <section class="filters">
@@ -49,167 +54,162 @@
         </section>
         <section class="places">
             <h1>Places</h1>
-            <article>
-                <h2>Home</h2>
-                <div class="price_by_night">$100</div>
-                <div class="information">
-                    <div class="max_guest">
-                        <h4>
-                        3 guests
-                        </h4>
+                <article>
+                    <h2>Home</h2>
+                    <div class="price_by_night">$100</div>
+                        <div class="information">
+                            <div class="max_guest">
+                            <h4>
+                            3 guests
+                            </h4>
+                        </div>
+                            <div class="number_rooms">
+                            <h4>
+                            2 bedrooms
+                            </h4>
+                            </div>
+                        <div class="number_bathrooms">
+                            <h4>
+                            2 bathrooms
+                            </h4>
+                        </div>
                     </div>
-                    <div class="number_rooms">
-                        <h4>
-                        2 bedrooms
-                        </h4>
+                        <div class="user">
+                            <h3><strong>Owner:</strong></h3> <h4>John Doe</h4>
+                        </div>
+                        <div class="description">
+                            <h4>This is a lovely 1 bedroom and 1 bathroom apartment that can accommodate 2 people. 
+                                It locates at the center of Lagos and next to subway line 1. 1 stop to Ikoyi, 2 stopps to Lekki.</h4>
+                        </div>
+                        <div class="amenities">
+                            <h2>Amenities</h2>
+                            <ul>
+                                <li class="liPets">Pets friendly</li>
+                            </ul>
+                        </div>
+                        <div class="reviews">
+                            <h2>2 Reviews</h2>
+                            <ul>
+                                <li>
+                                    <h3>From Bob Dylan on 27th January 2017</h3>
+                                    <p>This place was amazing! I had a great stay and loved every moment of it.</p>
+                                </li>
+                                <li>
+                                    <h3>From Neyo Ola on 15th August 2023</h3>
+                                    <p>It was a nice experience, I commend the staff</p>
+                                </li>
+                            </ul>
+                        </div>
+                </article>
+                <article>
+                    <h2>Tiny House</h2>
+                    <div class="price_by_night">
+                        $80
                     </div>
-                    <div class="number_bathrooms">
-                        <h4>
-                        2 bathrooms
-                        </h4>
+                        <div class="information">
+                            <div class="max_guest">
+                            <h4>
+                                2 Guest
+                            </h4>
+                        </div>
+                            <div class="number_rooms">
+                            <h4>
+                                3 Rooms
+                            </h4>
+                            </div>
+                            <div class="number_bathrooms">
+                            <h4>
+                                2 Bathrooms
+                            </h4>
+                        </div>
                     </div>
-                </div>
                     <div class="user">
-                        <h3><strong>Owner:</strong></h3> <h4>John Doe</h4>
+                        <h3>Owner:</h3> <h4>Niyi Olagbegi</h4>
                     </div>
                     <div class="description">
-                        <h4>This is a lovely 1 bedroom and 1 bathroom apartment that can accommodate 2 people. 
-                            It locates at the center of Lagos and next to subway line 1. 1 stop to Ikoyi, 2 stopps to Lekki.</h4>
+                        <h4>2 guests · Studio · 1 bed · 1 private bath
+                        Superhosts are experienced, highly rated hosts who are committed to providing great stays for guests.
+                        Great location
+                        90% of recent guests gave the location a 5-star rating.
+                        Great check-in experience
+                        95% of recent guests gave the check-in process a 5-star rating.</h4>
                     </div>
                     <div class="amenities">
                         <h2>Amenities</h2>
                         <ul>
-                            <li class="liPets">Pets friendly</li>
+                            <li class="liPet">Pet friendly</li>
+                            <li class="liTv">TV</li>
+                            <li class="liWifi">Wifi</li>
+                        </ul>
+                    </div>
+                    <div class="reviews">
+                        <h2>2 Reviews</h2>
+                        <ul>
+                            <li>
+                                <h3>From Daniel Dylan on 27th January 2022</h3>
+                                <p>This place was amazing! I had a great stay and loved every moment of it.</p>
+                            </li>
+                            <li>
+                                <h3>From Tommy on 11th November 2022</h3>
+                                <p>I love the hospitality</p>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+                <article>
+                    <h2>A Suite</h2>
+                    <div class="price_by_night">
+                        $200
+                    </div>
+                    <div class="information">
+                        <div class="max_guest">
+                            <h4>
+                                2 Guest
+                            </h4>
+                        </div>
+                        <div class="number_rooms">
+                            <h4>
+                                3 Rooms
+                            </h4>
+                        </div>
+                        <div class="number_bathrooms">
+                            <h4>
+                                2 bathrooms
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="user">
+                        <h3>Owner:</h3><h4>John Lennon</h4>
+                    </div>
+                    <div class="description">
+                        <h4>2 guests · Studio · 1 bed · 1 private bath
+                        Superhosts are experienced, highly rated hosts who are committed to providing great stays for guests.
+                        Great location
+                        90% of recent guests gave the location a 5-star rating.
+                        Great check-in experience
+                        95% of recent guests gave the check-in process a 5-star rating. </h4>
+                    </div>
+                    <div class="amenities">
+                        <h2>Amenities</h2>
+                        <ul>
+                            <li class="liPets">Pet friendly</li>
+                            <li class="liTV">TV</li>
                         </ul>
                     </div>
                     <div class="reviews">
                         <h2>Reviews</h2>
                         <ul>
                             <li>
-                                <h3>From Bob Dylan on 27th January 2017</h3>
-                                <p>This place was amazing! I had a great stay and loved every moment of it.</p>
-                            </li>
-                            <li>
-                                <h3>From Neyo Ola on 15th August 2023</h3>
-                                <p>It was a nice experience, I commend the staff</p>
+                                <h3>From Neyo Para on 1st August 2023</h3>
+                                <p>I can't wait to be back here.</p>
                             </li>
                         </ul>
                     </div>
-            </article>
-            <article>
-                <h2>Tiny House</h2>
-                <div class="price_by_night">
-                    $80
-                </div>
-                <div class="information">
-                    <div class="max_guest">
-                        <h4>
-                        2 Guest
-                        </h4>
-                    </div>
-                    <div class="number_rooms">
-                        <h4>
-                        3 Rooms
-                        </h4>
-                    </div>
-                    <div class="number_bathrooms">
-                        <h4>
-                        2 Bathrooms
-                        </h4>
-                    </div>
-                </div>
-                <div class="user">
-                    <h3>Owner:</h3> <h4>Niyi Olagbegi</h4>
-                </div>
-                <div class="description">
-                    <h4>2 guests · Studio · 1 bed · 1 private bath
-                    Superhosts are experienced, highly rated hosts who are committed to providing great stays for guests.
-                    Great location
-                    90% of recent guests gave the location a 5-star rating.
-                    Great check-in experience
-                    95% of recent guests gave the check-in process a 5-star rating.</h4>
-                </div>
-                <div class="amenities">
-                    <h2>Amenities</h2>
-                    <ul>
-                        <li class="liPet">Pet friendly</li>
-                        <li class="liTv">TV</li>
-                        <li class="liWifi">Wifi</li>
-                    </ul>
-                </div>
-                <div class="reviews">
-                    <h2>Reviews</h2>
-                    <ul>
-                        <li>
-                            <h3>From Daniel Dylan on 27th January 2022</h3>
-                            <p>This place was amazing! I had a great stay and loved every moment of it.</p>
-                        </li>
-                        <li>
-                            <h3>From Tommy on 11th November 2022</h3>
-                            <p>I love the hospitality</p>
-                        </li>
-                    </ul>
-                </div>
-            </article>
-            <article>
-                <h2>A Suite</h2>
-                <div class="price_by_night">
-                    $200
-                </div>
-                <div class="information">
-                    <div class="max_guest">
-                        <h4>
-                        2 Guest
-                        </h4>
-                    </div>
-                    <div class="number_rooms">
-                        <h4>
-                        3 Rooms
-                        </h4>
-                    </div>
-                    <div class="number_bathrooms">
-                        <h4>
-                        2 bathrooms
-                        </h4>
-                    </div>
-                </div>
-                <div class="user">
-                    <h3>Owner:</h3><h4>John Lennon</h4>
-                </div>
-                <div class="description">
-                    <h4>2 guests · Studio · 1 bed · 1 private bath
-                    Superhosts are experienced, highly rated hosts who are committed to providing great stays for guests.
-                    Great location
-                    90% of recent guests gave the location a 5-star rating.
-                    Great check-in experience
-                    95% of recent guests gave the check-in process a 5-star rating. </h4>
-                </div>
-                <div class="amenities">
-                    <h2>Amenities</h2>
-                    <ul>
-                        <li class="liPets">Pet friendly</li>
-                        <li class="liTV">TV</li>
-                    </ul>
-                </div>
-                <div class="reviews">
-                    <h2>Reviews</h2>
-                    <ul>
-                        <li>
-                            <h3>From Bob Daniel on 27th April 2023</h3>
-                            <p>This place was amazing! I had a great stay and loved every moment of it.</p>
-                        </li>
-                        <li>
-                            <h3>From Neyo Para on 1st August 2023</h3>
-                            <p>I can't wait to be back here.</p>
-                        </li>
-                    </ul>
-                </div>
-                </div>
-            </article>
+                </article>
         </section>
     </div>
     <footer>
-        <p>Best School</p>
+        Best School
     </footer>
 </body>
 </html>

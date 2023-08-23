@@ -90,7 +90,7 @@
     text-align: left;
 }
 
-section.places .amenities, section.places .reviews {
+section.places .amenities {
     margin-top: 40px;
     display: block;
     text-align: left;
@@ -125,6 +125,12 @@ section.places .amenities ul li.liWifi {
 
 section.places .amenities ul li.liPets {
     background-image: url('../images/icon_pets.png');
+}
+
+section.places .reviews {
+    position: relative;
+    margin-top: 60px;
+    text-align: left;
 }
 
 section.places .reviews ul {
